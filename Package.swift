@@ -5,16 +5,16 @@ import PackageDescription
 
 let package = Package(
     name: "libraw",
+    pkgConfig: "libraw",
+    providers: [
+        .brew(["libraw"])
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "libraw",
             targets: ["libraw"]),
     ],
-    providers: [
-        SystemPackageProvider.brew(["libraw"])
-    ],
-    pkgConfig: "libraw"
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
