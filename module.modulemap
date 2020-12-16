@@ -1,0 +1,5 @@
+module libraw [system] {
+    header "shim.h"
+    link "libraw"
+    export *
+}
