@@ -1,3 +1,7 @@
-# libraw
+# libSwiftLibRaw
 
-A description of this package.
+A swift libraw pckage
+
+Feel free to support
+
+2020 Thorsten Claus

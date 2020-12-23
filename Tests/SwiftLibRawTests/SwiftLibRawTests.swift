@@ -1,5 +1,5 @@
 import XCTest
-@testable import libraw
+@testable import SwiftLibRaw
 
 final class librawTests: XCTestCase {
     func testExample() {

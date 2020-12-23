@@ -1,0 +1,5 @@
+module libraw {
+    header "swiftlibraw_libraw.h"
+    link "libraw"
+    export *
+}
