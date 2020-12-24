@@ -1,5 +1,5 @@
 //
-//  shim.h
+//  swiftlibraw_libraw.h
 //  libraw
 //
 //  Created by Thorsten Claus on 16.12.20.

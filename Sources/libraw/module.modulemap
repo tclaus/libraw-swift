@@ -1,5 +1,5 @@
 module libraw {
-    header "swiftlibraw_libraw.h"
-    link "libraw"
+    umbrella header "swiftlibraw_libraw.h"
+    link "libraw.h"
     export *
 }

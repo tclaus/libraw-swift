@@ -1,15 +1,23 @@
 import XCTest
-@testable import SwiftLibRaw
 
-final class librawTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(libraw().text, "Hello, World!")
+final class SwiftLibRawTests: XCTestCase {
+   
+    func testGetVersion() {
+        let libVersion = AuxiliaryFunctions.libVersion()
+        XCTAssertTrue(libVersion.starts(with: "0.20"), "Expecting libraw version 0,20.x")
     }
-
+    
+    func testGetVersionNumber() {
+        let libVersionNumber = AuxiliaryFunctions.libVersionNumber()
+        XCTAssertTrue(libVersionNumber > 1)
+    }
+    
+    func testGetSupportedCameraList() {
+        let cameraList = AuxiliaryFunctions.cameraList()
+        XCTAssertTrue(cameraList.count  > 1)
+    }
+    
     static var allTests = [
-        ("testExample", testExample),
+        ("testGetVersion", testGetVersion),
     ]
 }
