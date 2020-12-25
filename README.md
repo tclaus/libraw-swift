@@ -1,7 +1,11 @@
-# libSwiftLibRaw
+# LibSwift
 
-A swift libraw pckage
+A swift libraw package
+
+Just started the project
 
 Feel free to support
 
-2020 Thorsten Claus
+
+##Author
+2020 [Thorsten Claus](https://github.com/tclaus)

@@ -6,8 +6,6 @@ public class AuxiliaryFunctions {
     
     // Returns string representation of LibRaw version in MAJOR.MINOR.PATCH-Status format (i.e. 0.6.0-Alpha2 or 0.6.1-Release).
     static func libVersion() -> String {
-        // LibRaw::version()
-        //return LibRaw::version()
         let versionPtr = libraw_version()!
         return String.init(cString: versionPtr)
     }
@@ -30,8 +28,10 @@ public class AuxiliaryFunctions {
         }
         return cameras
     }
-}
-extension String {
     
-
+    // This call returns count of non-fatal data errors (out of range, etc) occured in unpack() stage.
+    static func errorCount() -> Int {
+        return 0 // Int(libraw_err error_count())
+    }
 }
+

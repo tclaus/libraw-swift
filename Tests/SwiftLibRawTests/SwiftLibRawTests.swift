@@ -17,6 +17,12 @@ final class SwiftLibRawTests: XCTestCase {
         XCTAssertTrue(cameraList.count  > 1)
     }
     
+    func testGetErrorCount() {
+        let errorCount = AuxiliaryFunctions.errorCount()
+        XCTAssertTrue(errorCount == 0)
+    }
+    
+
     static var allTests = [
         ("testGetVersion", testGetVersion),
     ]
