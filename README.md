@@ -1,4 +1,4 @@
-# LibSwift
+# SwiftLibRaw
 
 A swift libraw package
 

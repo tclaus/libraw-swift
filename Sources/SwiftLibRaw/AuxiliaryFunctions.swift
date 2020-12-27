@@ -5,18 +5,18 @@ import libraw
 public class AuxiliaryFunctions {
     
     // Returns string representation of LibRaw version in MAJOR.MINOR.PATCH-Status format (i.e. 0.6.0-Alpha2 or 0.6.1-Release).
-    static func libVersion() -> String {
+    public static func libVersion() -> String {
         let versionPtr = libraw_version()!
-        return String.init(cString: versionPtr)
+        return String(cString: versionPtr)
     }
     
     // Returns integer representation of LibRaw version. During LibRaw development, the version number is always increase .
-    static func libVersionNumber() -> Int {
+    public static func libVersionNumber() -> Int {
         return Int(libraw_versionNumber())
     }
     
     // Returns list of supported cameras
-    static func cameraList() -> [String] {
+   public  static func cameraList() -> [String] {
         let ptr = libraw_cameraList()!
         let length = Int(libraw_cameraCount())
         var pointee = ptr.pointee!

@@ -9,7 +9,7 @@ import Foundation
 import libraw
 import OSLog
 
-class FileHandling {
+public class FileHandling {
     
     func openDataStream(stream : Any) -> LibRaw_errors
     {
@@ -24,7 +24,7 @@ class FileHandling {
     ///   - filePath: Full path to supported RAW file
     ///   - rawdata: Pointer to raw structure
     /// - Returns: 0 - Success or a LibRaw Error code
-    static func openFile(filePath : String, rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
+    public static func openFile(filePath : String, rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
         let result = libraw_open_file(rawdata, filePath)
         
         if (result != LIBRAW_SUCCESS.rawValue) {
@@ -40,7 +40,7 @@ class FileHandling {
     }
     
     /// Unpacks the RAW files of the image, calculates the black level (not for all formats). The results are placed in imgdata.image.
-    static func unpackFile(rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
+    public static func unpackFile(rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
         let result = libraw_unpack(rawdata);
 
         if (result != LIBRAW_SUCCESS.rawValue) {
