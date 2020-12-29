@@ -17,15 +17,20 @@ public class FileHandling {
         return LIBRAW_SUCCESS
     }
     
+    /// Creates a new object  that will be filled from libraw Data
+    public static func initLibRawData() -> UnsafeMutablePointer<libraw_data_t> {
+       return  libraw_init(0)
+    }
+    
     /// Tests if a file can be opened. Returns a zero if file cpould be open.
     /// This only reads the files metadata without actually unpack the image itself. To do so, use the Unpack function
     /// Returns an error otherwise. The libraw Data object becomes invalid in case of an error.
     /// - Parameters:
-    ///   - filePath: Full path to supported RAW file
+    ///   - fileUrl: Full path to supported RAW file
     ///   - rawdata: Pointer to raw structure
     /// - Returns: 0 - Success or a LibRaw Error code
-    public static func openFile(filePath : String, rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
-        let result = libraw_open_file(rawdata, filePath)
+    public static func openFile(fileUrl : URL, rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
+        let result = libraw_open_file(rawdata, fileUrl.path)
         
         if (result != LIBRAW_SUCCESS.rawValue) {
             if #available(OSX 11.0, *) {

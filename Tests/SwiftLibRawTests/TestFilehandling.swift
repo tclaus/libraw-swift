@@ -11,17 +11,18 @@ import libraw
 
 class TestFileHandling : XCTestCase {
     
-    let testfilePath = "/Users/thorstenclaus/Pictures/Mond_nov_2020/Moon.RAF"
+    // TODO: Add RAW to test resources
+    let testfilePath = URL(fileURLWithPath: "/Users/thorstenclaus/Pictures/Mond_nov_2020/Moon.RAF")
    
     func testOpenFile_notFound() {
         let rawdata = libraw_init(0)!;
-        let fileOpenresult = FileHandling.openFile(filePath: "",rawdata: rawdata)
+        let fileOpenresult = FileHandling.openFile(fileUrl: URL(fileURLWithPath: ""),rawdata: rawdata)
         XCTAssertEqual(fileOpenresult, LIBRAW_IO_ERROR)
     }
     
     func testOpenFile() {
         let rawdata = libraw_init(0)!;
-        let fileOpenresult = FileHandling.openFile(filePath: testfilePath,rawdata: rawdata)
+        let fileOpenresult = FileHandling.openFile(fileUrl: testfilePath,rawdata: rawdata)
         XCTAssertEqual(fileOpenresult, LIBRAW_SUCCESS)
         let unfold = rawdata.pointee
         
@@ -31,7 +32,7 @@ class TestFileHandling : XCTestCase {
     
     func testOpenAndUnpackFile() {
         let rawdata = libraw_init(0)!;
-        let fileOpenresult = FileHandling.openFile(filePath: testfilePath,rawdata: rawdata)
+        let fileOpenresult = FileHandling.openFile(fileUrl: testfilePath,rawdata: rawdata)
         XCTAssertEqual(fileOpenresult, LIBRAW_SUCCESS)
         
         let unpackResult = FileHandling.unpackFile(rawdata: rawdata)
