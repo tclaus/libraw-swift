@@ -13,7 +13,6 @@ public class FileHandling {
     
     func openDataStream(stream : Any) -> LibRaw_errors
     {
-        // int LibRaw::open_datastream(LibRaw_abstract_datastream *stream)
         return LIBRAW_SUCCESS
     }
     
@@ -57,6 +56,23 @@ public class FileHandling {
             libraw_close(rawdata);
         }
         return LibRaw_errors.init(result)
+    }
+    
+    /// Unpack image metadata after a file was opened
+    public static func metaData(rawdata: UnsafeMutablePointer<libraw_data_t>) {
+
+        // To be done
+        
+    }
+    
+    /// Returns image paraneters from opened file
+    public static func imageParameters(rawdata : UnsafeMutablePointer<libraw_data_t> ) -> ImageParameters {
+        return ImageParameters(iparams: rawdata.pointee.idata)
+    }
+    
+    /// Unpacked Images must be released at end of processing
+    static func recycle(rawdata: UnsafeMutablePointer<libraw_data_t>) {
+        libraw_recycle(rawdata);
     }
     
     /// Closes any open data object.

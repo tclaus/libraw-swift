@@ -21,7 +21,6 @@ final class SwiftLibRawTests: XCTestCase {
         let errorCount = AuxiliaryFunctions.errorCount()
         XCTAssertTrue(errorCount == 0)
     }
-    
 
     static var allTests = [
         ("testGetVersion", testGetVersion),
