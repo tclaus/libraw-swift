@@ -59,15 +59,8 @@ public class FileHandling {
     }
     
     /// Unpack image metadata after a file was opened
-    public static func metaData(rawdata: UnsafeMutablePointer<libraw_data_t>) {
-
-        // To be done
-        
-    }
-    
-    /// Returns image paraneters from opened file
-    public static func imageParameters(rawdata : UnsafeMutablePointer<libraw_data_t> ) -> ImageParameters {
-        return ImageParameters(iparams: rawdata.pointee.idata)
+    public static func metaData(rawdata: UnsafeMutablePointer<libraw_data_t>) -> MetaDataInformation {
+        return MetaDataInformation(rawdata)
     }
     
     /// Unpacked Images must be released at end of processing
