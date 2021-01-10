@@ -31,7 +31,7 @@ public class AuxiliaryFunctions {
     
     // This call returns count of non-fatal data errors (out of range, etc) occured in unpack() stage.
     static func errorCount() -> Int {
-        return 0 // Int(libraw_err error_count())
+        return 0
     }
 }
 

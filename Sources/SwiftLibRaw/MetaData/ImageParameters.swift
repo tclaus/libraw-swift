@@ -52,62 +52,60 @@ public struct ImageParameters  {
     
     init(parameters: libraw_iparams_t) {
         
-        camera_manufacturer = withUnsafePointer(to: parameters.make) {
+        self.camera_manufacturer = withUnsafePointer(to: parameters.make) {
             $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: $0)) {
                 String(cString: $0)
             }
         }
         
-        camera_normalized_manufacturer = withUnsafePointer(to: parameters.normalized_make) {
+        self.camera_normalized_manufacturer = withUnsafePointer(to: parameters.normalized_make) {
             $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: $0)) {
                 String(cString: $0)
             }
         }
         
-        camera_model = withUnsafePointer(to: parameters.model) {
+        self.camera_model = withUnsafePointer(to: parameters.model) {
             $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: $0)) {
                 String(cString: $0)
             }
         }
         
-        camera_normalized_model = withUnsafePointer(to: parameters.normalized_model) {
+        self.camera_normalized_model = withUnsafePointer(to: parameters.normalized_model) {
             $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: $0)) {
                 String(cString: $0)
             }
         }
         
-        software = withUnsafePointer(to: parameters.software) {
+        self.software = withUnsafePointer(to: parameters.software) {
             $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: $0)) {
                 String(cString: $0)
             }
         }
         
-        raw_count = Int(parameters.raw_count)
+        self.raw_count = Int(parameters.raw_count)
+        self.number_of_colors = Int(parameters.colors)
+        self.filters = Int(parameters.filters)
         
-        number_of_colors = Int(parameters.colors)
-        filters = Int(parameters.filters)
-        
-        color_description = withUnsafePointer(to: parameters.cdesc) {
+        self.color_description = withUnsafePointer(to: parameters.cdesc) {
             $0.withMemoryRebound(to: UInt8.self, capacity: MemoryLayout.size(ofValue: $0)) {
                 String(cString: $0)
             }
         }
         
-        isFOV_on = Int(parameters.is_foveon)
+        self.isFOV_on = Int(parameters.is_foveon)
         
         // 6x6 matrix
-        xtrans_6x6 = withUnsafePointer(to: parameters.xtrans){
+        self.xtrans_6x6 = withUnsafePointer(to: parameters.xtrans){
             $0.withMemoryRebound(to: UInt8.self, capacity: 36) {
                 return [UInt8](UnsafeBufferPointer(start: $0, count: MemoryLayout.size(ofValue: parameters.xtrans)))
             }
         }
         // 6x6 Matrix
-        xtrans_abs_6x6 = withUnsafePointer(to: parameters.xtrans_abs){
+        self.xtrans_abs_6x6 = withUnsafePointer(to: parameters.xtrans_abs){
             $0.withMemoryRebound(to: UInt8.self, capacity: 36) {
                 return [UInt8](UnsafeBufferPointer(start: $0, count: MemoryLayout.size(ofValue: parameters.xtrans_abs)))
             }
         }
-        
     }
 }
 

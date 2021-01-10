@@ -65,6 +65,51 @@ class TestMetadata: XCTestCase {
         print("Image size: w/h \(imageSizes.width)x\(imageSizes.heigth)")
     }
     
+    func testOtherImageInformation() {
+        let rawdata = libraw_init(0)!;
+        let fileOpenresult = FileHandling.openFile(fileUrl: testfilePath,rawdata: rawdata)
+        XCTAssertEqual(fileOpenresult, LIBRAW_SUCCESS)
+        
+        let otherInformation : ImageOtherInformation = ImageOtherInformation(otherInformation: rawdata.pointee.other)
+        
+        XCTAssertTrue(otherInformation.analogBalance.count > 0)
+        XCTAssertTrue(otherInformation.aperture > 0)
+        XCTAssertTrue(otherInformation.focal_length > 0 )
+        XCTAssertTrue(otherInformation.iso_speed == 200 )
+        
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: otherInformation.shooted_at)
+        
+        // Test picture was shooted at 2020
+        XCTAssertTrue(year == 2020)
+        XCTAssertTrue( otherInformation.shot_order == 0)
+        XCTAssertTrue(otherInformation.shutter >= 0.002) // 1/500
+        XCTAssertEqual(otherInformation.shutter_in_fractions,"1/500")
+        
+        print("Apertue: \(otherInformation.aperture)")
+        print("Focal Length: \(otherInformation.focal_length)")
+        print("ISO: \(otherInformation.iso_speed)")
+        print("Exposure Time: \(otherInformation.shutter_in_fractions)")
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        let formattedDate = dateFormatter.string(from: otherInformation.shooted_at)
+        print("Shooto at: \(formattedDate)")
+    }
+    
+    func testLensInformation() {
+        let rawdata = libraw_init(0)!;
+        let fileOpenresult = FileHandling.openFile(fileUrl: testfilePath,rawdata: rawdata)
+        XCTAssertEqual(fileOpenresult, LIBRAW_SUCCESS)
+        
+        let lensInformation = LenseInformation(lensInfo: rawdata.pointee.lens)
+        XCTAssertEqual(lensInformation.focalLengthIn35mmFormat, 84)
+        XCTAssertEqual(lensInformation.maxFocal, 56) // Foto was shot with fixed lense
+        XCTAssertEqual(lensInformation.minFocal, 56)
+        
+    }
+    
     func testMetaInformation() {
         let rawdata = libraw_init(0)!;
         let fileOpenresult = FileHandling.openFile(fileUrl: testfilePath,rawdata: rawdata)

@@ -43,20 +43,7 @@ public class FileHandling {
         return LibRaw_errors.init(result)
     }
     
-    /// Unpacks the RAW files of the image, calculates the black level (not for all formats). The results are placed in imgdata.image.
-    public static func unpackFile(rawdata: UnsafeMutablePointer<libraw_data_t>) -> LibRaw_errors {
-        let result = libraw_unpack(rawdata);
 
-        if (result != LIBRAW_SUCCESS.rawValue) {
-            if #available(OSX 11.0, *) {
-               let defaultLog = Logger()
-               let errorMessage = String(cString: libraw_strerror(result))
-                defaultLog.log("LibRaw error: \(errorMessage)")
-            }
-            libraw_close(rawdata);
-        }
-        return LibRaw_errors.init(result)
-    }
     
     /// Unpack image metadata after a file was opened
     public static func metaData(rawdata: UnsafeMutablePointer<libraw_data_t>) -> MetaDataInformation {
@@ -68,7 +55,7 @@ public class FileHandling {
         libraw_recycle(rawdata);
     }
     
-    /// Closes any open data object.
+    /// Closes any open data object. You dont need to call this from extern
     static func closeData(rawdata: UnsafeMutablePointer<libraw_data_t>) {
         libraw_close(rawdata)
     }
