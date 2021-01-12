@@ -16,7 +16,8 @@ class TestImageProcessing : XCTestCase {
         let fileOpenresult = FileHandling.openFile(fileUrl: testfilePath,rawdata: rawdata)
         XCTAssertEqual(fileOpenresult, LIBRAW_SUCCESS)
         
-        let unpackResult = ImageProcessing.getImageFromData(rawdata)
-        XCTAssertNotNil(unpackResult)
+        let cgImage = ImageProcessing.getImageFromData(rawdata)
+        XCTAssertNotNil(cgImage)
+        
     }
 }
